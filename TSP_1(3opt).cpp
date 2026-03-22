@@ -9,6 +9,13 @@ double dist(double x1, double y1, double x2, double y2) {
     return sqrt(dx*dx + dy*dy);
 }
 
+double edge_dist(const vector<int>& route, int i, int j, const vector<double>& x, const vector<double>& y) {
+    int n = route.size();
+    int a = route[(i + n) % n];
+    int b = route[(j + n) % n];
+    return dist(x[a], y[a], x[b], y[b]);
+}
+
 double route_length(const vector<int>& route, const vector<double>& x, const vector<double>& y) {
     double length = 0;
     int n = route.size();
@@ -16,13 +23,6 @@ double route_length(const vector<int>& route, const vector<double>& x, const vec
         length += edge_dist(route, i, i + 1, x, y);
     }
     return length;
-}
-
-double edge_dist(const vector<int>& route, int i, int j, const vector<double>& x, const vector<double>& y) {
-    int n = route.size();
-    int a = route[(i + n) % n];
-    int b = route[(j + n) % n];
-    return dist(x[a], y[a], x[b], y[b]);
 }
 
 void reverse_part(vector<int>& route, int start, int end) {
